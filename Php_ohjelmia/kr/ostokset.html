@@ -1,0 +1,171 @@
+<html>
+<head>
+<title>Ostoslista v.1.0</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="listastyle.css">
+<script>
+
+// Funktio, joka luo Ajax-yhteyden
+function ajaxAction(){
+	var xmlhttp;
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  }	
+	return xmlhttp;
+}
+
+
+function clearList(){
+
+var xmlhttp = ajaxAction();
+
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("lista").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","clearList.php",true);
+xmlhttp.send();
+}
+function tyhjennys(){
+
+var xmlhttp = ajaxAction();
+
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("lista").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","tyhjennys.php",true);
+xmlhttp.send();
+}
+
+
+function removeItem(item){
+
+}
+
+function checkItem(otettu,item){
+	var xmlhttp = ajaxAction();
+	
+	xmlhttp.onreadystatechange=function()
+		{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			{
+			document.getElementById("lista").innerHTML=xmlhttp.responseText;
+			}
+	}
+xmlhttp.open("GET","checkItem.php?tuote="+item+"&otettu="+otettu,true);
+xmlhttp.send();
+	
+	
+	
+}
+
+function showList(){
+
+var xmlhttp;
+
+var xmlhttp = ajaxAction();
+
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("lista").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","showList.php",true);
+xmlhttp.send();
+}
+
+
+
+function addItem(item)
+{
+var xmlhttp;
+
+var xmlhttp = ajaxAction();
+
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("lista").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","addItem.php?tuote="+item,true);
+xmlhttp.send();
+
+}
+
+function checkEnter(e) {
+	if (e.keyCode==13) {
+		addItem(txtTuote.value);
+		txtTuote.value="";
+		txtTuote.focus();
+	}
+}
+
+
+function hakija(str){
+
+if (searchtxt.length==0) { showList(); return;}
+
+var xmlhttp;
+ if (window.XMLHttpRequest)
+   {// code for IE7+, Firefox, Chrome, Opera, Safari
+   xmlhttp=new XMLHttpRequest();
+   }
+ else
+   {// code for IE6, IE5
+   xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+   }
+ xmlhttp.onreadystatechange=function()
+   {
+   if (xmlhttp.readyState==4 && xmlhttp.status==200)
+     {
+     document.getElementById("lista").innerHTML=xmlhttp.responseText;
+     }
+   }
+ xmlhttp.open("GET","hakija2.php?nimi="+str,true);
+ xmlhttp.send();
+}
+
+</script>
+</head>
+<body onload="showList()">
+	<div id="listarea">
+		<h1>Ostoslista</h1>
+		<div id="lista">
+
+		</div>
+	</div>
+	
+
+	<!-- Uuden tuotteen lisääminen --> 
+	<div id="addlistitem">
+	<h2>Lisää tuote:</h2>
+	
+	<input id="txtTuote" name="tuote" type="text" value="" onblur="addItem(this.value)" onkeypress="checkEnter(event);"/>
+	<input id="ok" name="ok" type="button" value="lisää" onclick="addItem(txtTuote.value)" />
+	<input id="delete" name="delete" type="button" value="poista" onclick="clearList()" />
+	<input id="deleteall" name="deleteall" type="button" value="Tyhjenna" onclick="tyhjennys()" />
+	</div>
+
+	<span id="txtStatus"></span>
+	<div id"hakuja">
+	<h3>Hae tuote</h3> <input type="text" id="haku" onkeyup="hakija(this.value)" />
+	</div>
+	<a href="Logout.php">Kirjaudu ulos</a>
+</body>
+<html>

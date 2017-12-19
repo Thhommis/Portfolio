@@ -1,0 +1,21 @@
+body {text-align: center;}
+
+#listarea 
+{
+text-align: left;
+width: 400px; 
+border: 1px solid black; 
+margin: 50px auto;
+padding: 20px;
+font-size: 2em;
+}
+
+#txtStatus {
+font-size: 10px; color: #444;
+}
+
+ul {list-style-type: none;  0px;}
+ul li {line-height: 1.5em;vertical-align: bottom;}
+ul li a, ul li a:visited {text-decoration: none; color: #111;}
+
+.otettu {text-decoration:line-through;color:#555;}
