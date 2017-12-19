@@ -1,2 +1,2 @@
 # portfolio
-Sisältää koodaamiani ohjelmia, joista suurin osa on koulutehtäviä.
+Sisältää tekemiäni tuotoksia. Php, java projekteja sekä SketchUpilla mallinnettu talo Mikkelin asuntomessuilta, sekä yksi mallinnettu huone.
